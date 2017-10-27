@@ -5,13 +5,15 @@
  */
 package Model;
 
-import Manage.Loger;
-import Manage.ManagerArray;
 import static Manage.ManagerArray.array;
 import static Manage.ManagerArray.swap;
+import static Manage.ManagerIJ.lbShowI;
+import static Manage.ManagerIJ.timeIJ;
 import Manage.ManagerThread;
 import Manage.SortParent;
 import java.awt.Color;
+import static java.awt.Component.CENTER_ALIGNMENT;
+import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -24,30 +26,48 @@ import javax.swing.JPanel;
 public class QuickSortModel extends SortParent {
 
     private final JPanel pnSimulation;
+    private JLabel lbPivot;
+    private boolean isCheckL = false;
+    private boolean isCheckR = false;
 
     public QuickSortModel(JList jListRecord, JLabel[] lbArray, JLabel lbPosI, JLabel lbPosJ, JFrame frame, JPanel pnSimmulation) {
         super(jListRecord, lbArray, lbPosI, lbPosJ, frame);
         this.pnSimulation = pnSimmulation;
-        Manage.ManagerIJ.lbShowI.setText("Left");
-        Manage.ManagerIJ.lbShowJ.setText("Right");
+        addLbPivot();
     }
 
     /*
     *Hàm sắp xếp tăng
      */
-    public void sortIncrease() {
-        quickSort1(0, array.length - 1);
+    public void sortIncrease(int i, int j) {
+        int pivot, pivotIndex, k;
+        pivotIndex = findPivot(i, j);
+        if (pivotIndex != -1) {
+            pivot = array[pivotIndex];
+            //setElementOfI(lbArray[pivotIndex]);
+            k = partition(i, j, pivot);
+            sortIncrease(i, k - 1);
+            sortIncrease(k, j);
+        }
     }
 
     /*
     *Hàm sắp xếp giảm
      */
-    public void sortDecrease() {
-        System.out.println("Sap xem giam");
-        quickSort2(0, array.length - 1);
+    public void sortDecrease(int i, int j) {
+        System.out.println("Sap xep giam");
+        int pivot, pivotIndex, k;
+        pivotIndex = findPivot(i, j);
+        if (pivotIndex != -1) {
+            pivot = array[pivotIndex];
+            //setElementOfI(lbArray[pivotIndex]);
+            k = partition1(i, j, pivot);
+            sortDecrease(i, k - 1);
+            sortDecrease(k, j);
+        }
     }
 
-    private int findPivot1(int i, int j) {
+    private int findPivot(int i, int j) {
         int firstKey;
         int k;
         k = i + 1;
@@ -59,74 +79,59 @@ public class QuickSortModel extends SortParent {
             return -1;
         }
         if (array[k] > array[i]) {
+            showPivot(lbArray[k]);
             return k;
         }
+        showPivot(lbArray[i]);
         return i;
     }
 
-    private int partition1(int i, int j, int pivot) {
+
+    /*
+    *
+     */
+    private int partition(int i, int j, int pivot) {
         int L, R;
         L = i;
         R = j;
         while (L <= R) {
             while (array[L] < pivot) {
                 //Gán vị trí i
-                pij.setElementOfI(L, lbArray[L]);
                 L++;
+                setElementOfL(lbPosI, L);
             }
             while (array[R] >= pivot) {
-                pij.setElementOfJ(R, lbArray[R]);
                 R--;
+                setElementOfR(lbPosJ, R);
             }
             if (L < R) {
                 swap(L, R);
                 swap(lbArray[L], lbArray[R]);
             }
         }
+        //setPointPartition(lbArray[L]);
+        //System.out.println(lbArray[L].getText());
+        showPartition(lbArray[L]);
         return L;
     }
 
-    public void quickSort1(int i, int j) {
-        int pivot, pivotIndex, k;
-        pivotIndex = findPivot1(i, j);
-        if (pivotIndex != -1) {
-            pivot = array[pivotIndex];
-            //changeColorPivot(lbArray[pivotIndex],1);
-            k = partition1(i, j, pivot);
-            quickSort1(i, k - 1);
-            quickSort1(k, j);
-        }
-    }
-
-    private int findPivot2(int i, int j) {
-        int firstKey;
-        int k;
-        k = i + 1;
-        firstKey = array[i];
-        while ((k <= j) && array[k] == firstKey) {
-            k++;
-        }
-        if (k < j) {
-            return -1;
-        }
-        if (array[k] < array[i]) {
-            return k;
-        }
-        return i;
-    }
-
-    private int partition2(int i, int j, int pivot) {
+    /*
+    *
+     */
+    private int partition1(int i, int j, int pivot) {
         int L, R;
         L = i;
+        setElementOfL(lbPosI, L);
         R = j;
+        setElementOfR(lbPosJ, R);
         while (L <= R) {
             while (array[L] >= pivot) {
                 //Gán vị trí i
-                pij.setElementOfI(L, lbArray[L]);
+                setElementOfL(lbPosI, L);
                 L++;
             }
             while (array[R] < pivot) {
-                pij.setElementOfJ(R, lbArray[R]);
+                setElementOfR(lbPosJ, R);
                 R--;
             }
             if (L < R) {
@@ -134,62 +139,13 @@ public class QuickSortModel extends SortParent {
                 swap(lbArray[L], lbArray[R]);
             }
         }
+        //setPointPartition(lbArray[L]);
+        //System.out.println(lbArray[L].getText());
+        showPartition(lbArray[L]);
         return L;
     }
 
-    public void quickSort2(int i, int j) {
-        int pivot, pivotIndex, k;
-        pivotIndex = findPivot1(i, j);
-        if (pivotIndex != -1) {
-            pivot = array[pivotIndex];
-            //changeColorPivot(lbArray[pivotIndex],1);
-            k = partition1(i, j, pivot);
-            quickSort1(i, k - 1);
-            quickSort1(k, j);
-        }
-    }
-
-    private void createArray() {
-//        //deleteArray();
-//        index = (int) spNum.getValue();
-//        lbArray = new JLabel[index];
-//        lbArrayPos = new JLabel[index];
-//        array = new int[index];
-//        for (int i = 0; i < index; i++) {
-//            //Create list JLabel
-//            lbArray[i] = new JLabel("0");
-//            lbArrayPos[i] = new JLabel("" + i);
-//            //lbArray[i].setIcon(new ImageIcon(getICMinion()));
-//            pnSimulation.add(lbArray[i]);
-//            pnSimulation.add(lbArrayPos[i]);
-//
-//            //Set JLabel
-//            lbArray[i].setSize(50, 50);
-//            lbArray[i].setForeground(Color.WHITE);
-//            lbArray[i].setBackground(new Color(255, 83, 1));
-//            Border border = BorderFactory.createLineBorder(new Color(234, 237, 238), 1);
-//            lbArray[i].setBorder(border);
-//            lbArray[i].setHorizontalAlignment((int) CENTER_ALIGNMENT);
-//            lbArray[i].setOpaque(true);
-//
-//            lbArrayPos[i].setSize(50, 50);
-//            lbArrayPos[i].setHorizontalAlignment((int) CENTER_ALIGNMENT);
-//
-//            //set fonts
-//            lbArray[i].setFont(new Font("Tahoma", Font.PLAIN, 30));
-//
-//            if (i == 0) {
-//                lbArray[i].setLocation((pnSimulation.getWidth() / 2 - 50) - (31 * index), 175);
-//                lbArrayPos[i].setLocation((pnSimulation.getWidth() / 2 - 50) - (31 * index),
-//                        pnSimulation.getHeight() - 40);
-//            } else {
-//                lbArray[i].setLocation(lbArray[i - 1].getX() + 70, 175);
-//                lbArrayPos[i].setLocation(lbArray[i - 1].getX() + 70, pnSimulation.getHeight() - 40);
-//            }
-//        }
-    }
-
-    private void changeColorPivot(JLabel lb, int state) {
+    private void showPivot(JLabel lb) {
         ManagerThread.curT++;
         int cur = ManagerThread.curT;
         ManagerThread.threads[cur] = new Thread(() -> {
@@ -197,14 +153,26 @@ public class QuickSortModel extends SortParent {
                 if (cur != 0) {
                     ManagerThread.threads[cur - 1].join();
                 }
-                if (state == 1) {
-                    lb.setBackground(new Color(22, 160, 93));
-                    Thread.sleep(ManagerThread.time);
-                } else {
-                    lb.setBackground(new Color(255, 83, 1));
-                    Thread.sleep(ManagerThread.time);
-                }
+                lb.setBackground(new Color(41, 98, 255));
+                lbPivot.setLocation(lb.getX() - 25, 25);
+                Thread.sleep(ManagerThread.time);
+            } catch (InterruptedException e) {
+                System.out.println("" + e.getMessage());
+            }
+        });
+        ManagerThread.threads[cur].start();
+    }
 
+    private void showPartition(JLabel lb) {
+        ManagerThread.curT++;
+        int cur = ManagerThread.curT;
+        ManagerThread.threads[cur] = new Thread(() -> {
+            try {
+                if (cur != 0) {
+                    ManagerThread.threads[cur - 1].join();
+                }
+                lb.setBackground(new Color(158, 158, 158));
+                Thread.sleep(ManagerThread.time);
             } catch (InterruptedException e) {
                 System.out.println("" + e.getMessage());
             }
@@ -258,6 +226,59 @@ public class QuickSortModel extends SortParent {
                 } catch (InterruptedException e) {
                     System.out.println("" + e.getMessage());
                 }
+            }
+        });
+        ManagerThread.threads[cur].start();
+    }
+
+    private void addLbPivot() {
+        Manage.ManagerIJ.lbShowI.setText("L");
+        Manage.ManagerIJ.lbShowJ.setText("R");
+        lbPivot = new JLabel("Pi");
+        lbPivot.setSize(100, 100);
+        lbPivot.setForeground(new Color(0, 122, 255));
+        lbPivot.setHorizontalAlignment((int) CENTER_ALIGNMENT);
+        lbPivot.setLocation(pnSimulation.getWidth() / 2 - 400, pnSimulation.getHeight() - 40);
+
+        Font font = new Font("Segoe UI", Font.PLAIN, 35);
+        lbPivot.setFont(font);
+
+        pnSimulation.add(lbPivot);
+    }
+
+    public void setElementOfL(JLabel lbL, int pos) {
+        int x = lbArray[pos].getX() - 25;
+        ManagerThread.curT++;
+        int cur = ManagerThread.curT;
+        ManagerThread.threads[cur] = new Thread(() -> {
+            try {
+                if (cur != 0) {
+                    ManagerThread.threads[cur - 1].join();
+                }
+                //Dò i thay đổi màu lb tại vị trí nó đi qua
+                lbPosI.setLocation(x, 25);
+                Thread.sleep(timeIJ);
+            } catch (InterruptedException e) {
+
+            }
+        });
+        ManagerThread.threads[cur].start();
+    }
+
+    public void setElementOfR(JLabel lbR, int pos) {
+        int x = lbArray[pos].getX() - 25;
+        ManagerThread.curT++;
+        int cur = ManagerThread.curT;
+        ManagerThread.threads[cur] = new Thread(() -> {
+            try {
+                if (cur != 0) {
+                    ManagerThread.threads[cur - 1].join();
+                }
+                //Dò i thay đổi màu lb tại vị trí nó đi qua
+                lbPosJ.setLocation(x, 25);
+                Thread.sleep(timeIJ);
+            } catch (InterruptedException e) {
+
             }
         });
         ManagerThread.threads[cur].start();

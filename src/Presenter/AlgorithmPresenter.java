@@ -5,7 +5,10 @@
  */
 package Presenter;
 
+import Manage.ManagerArray;
+import static Manage.ManagerArray.array;
 import Model.BubbleSortModel;
+import Model.HeapSortModel;
 import Model.InsertSortModel;
 import Model.InterChangeSortModel;
 import Model.QuickSortModel;
@@ -15,6 +18,7 @@ import View.Algorithm;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 
 /**
  *
@@ -28,16 +32,18 @@ public class AlgorithmPresenter implements AlgorithmPresenterIm {
     private final JLabel lbPosI;
     private final JLabel lbPosJ;
     private final JFrame frame;
+    private JPanel pnSimulation;
     private boolean isCheckIncrease = false;
     private int n;
 
-    public AlgorithmPresenter(Algorithm mAlgorithm, JList jListRecord, JLabel[] lbArray, JLabel lbPosI, JLabel lbPosJ,JFrame frame) {
+    public AlgorithmPresenter(Algorithm mAlgorithm, JList jListRecord, JLabel[] lbArray, JLabel lbPosI, JLabel lbPosJ,JFrame frame,JPanel pnSimulation) {
         this.mAlgorithm = mAlgorithm;
         this.jListRecord = jListRecord;
         this.lbArray = lbArray;
         this.lbPosI = lbPosI;
         this.lbPosJ = lbPosJ;
         this.frame = frame;
+        this.pnSimulation = pnSimulation;
     }
 
     public AlgorithmPresenter(Algorithm mAlgorithm, JList jListRecord, JLabel[] lbArray, JLabel lbPosI, JLabel lbPosJ, int n,JFrame frame) {
@@ -69,14 +75,14 @@ public class AlgorithmPresenter implements AlgorithmPresenterIm {
             case 1:
                 //Quick Sort
                 mAlgorithm.chooserAlgorithm("Thuật toán sắp xếp Quick Sort");
-                QuickSortModel qsm = new QuickSortModel(jListRecord, lbArray, lbPosI, lbPosJ, frame,null);
+                QuickSortModel qsm = new QuickSortModel(jListRecord, lbArray, lbPosI, lbPosJ, frame,pnSimulation);
                 //Kiểm tra sắp xếp tăng or giảm
                 if(isCheckIncrease){
                     //System.out.println("Sort Giam");
-                    qsm.sortDecrease();
+                    qsm.sortDecrease(0, ManagerArray.array.length - 1);
                 }else{
                     //System.out.println("Sort Tang");
-                    qsm.sortIncrease();
+                    qsm.sortIncrease(0, ManagerArray.array.length - 1);
                 }
                 break;
             case 2:
@@ -93,6 +99,19 @@ public class AlgorithmPresenter implements AlgorithmPresenterIm {
                 }
                 break;
             case 3:
+                //Heap Sort
+                mAlgorithm.chooserAlgorithm("Thuật toán sắp xếp Heap Sort");
+                HeapSortModel hm = new HeapSortModel(jListRecord, lbArray, lbPosI, lbPosJ,n);
+                //Kiểm tra sắp xếp tăng or giảm
+//                if (isCheckIncrease) {
+//                    //System.out.println("Sort Giam");
+//                    bsm.sortDecrease();
+//                } else {
+//                    //System.out.println("Sort Tang");
+//                    bsm.sortIncrease();
+//                }
+                break;
+            case 4:
                 //Bubble Sort
                 mAlgorithm.chooserAlgorithm("Thuật toán sắp xếp Bubble Sort");
                 BubbleSortModel bsm = new BubbleSortModel(jListRecord, lbArray, lbPosI, lbPosJ,frame);
@@ -105,7 +124,7 @@ public class AlgorithmPresenter implements AlgorithmPresenterIm {
                     bsm.sortIncrease();
                 }
                 break;
-            case 4:
+            case 5:
                 //Selection Sort
                 mAlgorithm.chooserAlgorithm("Thuật toán sắp xếp Selection Sort");
                 SelectionSortModel slm = new SelectionSortModel(jListRecord, lbArray, lbPosI, lbPosJ);
@@ -118,7 +137,7 @@ public class AlgorithmPresenter implements AlgorithmPresenterIm {
                     slm.sortIncrease();
                 }
                 break;
-            case 5:
+            case 6:
                 //InterChange Sort
                 mAlgorithm.chooserAlgorithm("Thuật toán sắp xếp InterChange Sort");
                 //Gọi tới InterChangeModel
@@ -131,7 +150,6 @@ public class AlgorithmPresenter implements AlgorithmPresenterIm {
                     // System.out.println("Sort Tang");
                     itm.sortIncrease();
                 }
-                //HeapSortModel hm = new HeapSortModel(jListRecord, lbArray, lbPosI, lbPosJ,n);
                 break;
         }
     }

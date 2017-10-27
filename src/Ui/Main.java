@@ -42,8 +42,10 @@ public class Main extends javax.swing.JFrame implements Simulator, Algorithm {
 
     private void initComponents2() {
         getContentPane().setBackground(new Color(255, 255, 255));
+        jScrollPane1.setOpaque(false);
+        jScrollPane1.getViewport().setOpaque(false);
     }
-    
+
     private void initLableIJ() {
         lbShowI = new JLabel("i");
         lbShowI.setSize(100, 100);
@@ -54,7 +56,7 @@ public class Main extends javax.swing.JFrame implements Simulator, Algorithm {
         lbShowJ.setSize(100, 100);
         lbShowJ.setForeground(new Color(0, 122, 255));
         lbShowJ.setHorizontalAlignment((int) CENTER_ALIGNMENT);
-        
+
         lbShowI.setLocation(pnSimulation.getWidth() / 2 - 400, pnSimulation.getHeight() - 40);
         lbShowJ.setLocation(lbShowI.getX() + 200, pnSimulation.getHeight() - 40);
 
@@ -98,7 +100,7 @@ public class Main extends javax.swing.JFrame implements Simulator, Algorithm {
 
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -110,6 +112,7 @@ public class Main extends javax.swing.JFrame implements Simulator, Algorithm {
         jScrollPane2 = new javax.swing.JScrollPane();
         jListRecord = new javax.swing.JList<>();
         lbNameAlgorithm = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         tgbShellSort = new javax.swing.JToggleButton();
         tgbInterChangeSort = new javax.swing.JToggleButton();
@@ -117,6 +120,7 @@ public class Main extends javax.swing.JFrame implements Simulator, Algorithm {
         tgbBubbleSort = new javax.swing.JToggleButton();
         tgbInsertSort = new javax.swing.JToggleButton();
         tgbQuickSort = new javax.swing.JToggleButton();
+        tgbHeapSort = new javax.swing.JToggleButton();
         pnSimulation = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -138,6 +142,7 @@ public class Main extends javax.swing.JFrame implements Simulator, Algorithm {
         rdbIncrease = new javax.swing.JRadioButton();
         rdbDecrease = new javax.swing.JRadioButton();
         btnPauseAlgorithm = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -192,6 +197,9 @@ public class Main extends javax.swing.JFrame implements Simulator, Algorithm {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 452, 680, 190));
 
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setOpaque(false);
+
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setOpaque(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -199,34 +207,41 @@ public class Main extends javax.swing.JFrame implements Simulator, Algorithm {
         buttonGroup3.add(tgbShellSort);
         tgbShellSort.setText("Shell Sort");
         tgbShellSort.setEnabled(false);
-        jPanel2.add(tgbShellSort, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 120, -1));
+        jPanel2.add(tgbShellSort, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, -1));
 
         buttonGroup3.add(tgbInterChangeSort);
         tgbInterChangeSort.setText("InterChange Sort");
         tgbInterChangeSort.setEnabled(false);
-        jPanel2.add(tgbInterChangeSort, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 120, -1));
+        jPanel2.add(tgbInterChangeSort, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 120, -1));
 
         buttonGroup3.add(tgbSelectionSort);
         tgbSelectionSort.setText("Selection Sort");
         tgbSelectionSort.setEnabled(false);
-        jPanel2.add(tgbSelectionSort, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 120, -1));
+        jPanel2.add(tgbSelectionSort, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 120, -1));
 
         buttonGroup3.add(tgbBubbleSort);
         tgbBubbleSort.setText("Bubble Sort");
         tgbBubbleSort.setEnabled(false);
-        jPanel2.add(tgbBubbleSort, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 120, -1));
+        jPanel2.add(tgbBubbleSort, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 120, -1));
 
         buttonGroup3.add(tgbInsertSort);
         tgbInsertSort.setText("Insert Sort");
         tgbInsertSort.setEnabled(false);
-        jPanel2.add(tgbInsertSort, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 120, -1));
+        jPanel2.add(tgbInsertSort, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 120, -1));
 
         buttonGroup3.add(tgbQuickSort);
         tgbQuickSort.setText("Quick Sort");
         tgbQuickSort.setEnabled(false);
-        jPanel2.add(tgbQuickSort, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 120, -1));
+        jPanel2.add(tgbQuickSort, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 120, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 450, 160, 190));
+        buttonGroup3.add(tgbHeapSort);
+        tgbHeapSort.setText("Heap Sort");
+        tgbHeapSort.setEnabled(false);
+        jPanel2.add(tgbHeapSort, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 120, -1));
+
+        jScrollPane1.setViewportView(jPanel2);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 450, 160, 190));
 
         pnSimulation.setBackground(new java.awt.Color(255, 255, 255));
         pnSimulation.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -259,7 +274,7 @@ public class Main extends javax.swing.JFrame implements Simulator, Algorithm {
         jLabel3.setText("Tối đa (15)");
         jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
-        spNum.setModel(new javax.swing.SpinnerNumberModel(15, 2, 15, 1));
+        spNum.setModel(new javax.swing.SpinnerNumberModel(10, 2, 15, 1));
         jPanel5.add(spNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 27, -1, -1));
 
         btnCreateArray.setText("Tạo mảng");
@@ -365,6 +380,14 @@ public class Main extends javax.swing.JFrame implements Simulator, Algorithm {
         });
         jPanel3.add(btnPauseAlgorithm, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 156, -1));
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
+
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 450, 220, 190));
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -441,6 +464,10 @@ public class Main extends javax.swing.JFrame implements Simulator, Algorithm {
         pauseThread();
     }//GEN-LAST:event_btnPauseAlgorithmActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new CompareAlgorithm().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -467,6 +494,7 @@ public class Main extends javax.swing.JFrame implements Simulator, Algorithm {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JMenuItem itemEditBackground;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -483,6 +511,7 @@ public class Main extends javax.swing.JFrame implements Simulator, Algorithm {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JLabel lbNameAlgorithm;
@@ -492,6 +521,7 @@ public class Main extends javax.swing.JFrame implements Simulator, Algorithm {
     private javax.swing.JRadioButton rdbIncrease;
     private javax.swing.JSpinner spNum;
     private javax.swing.JToggleButton tgbBubbleSort;
+    private javax.swing.JToggleButton tgbHeapSort;
     private javax.swing.JToggleButton tgbInsertSort;
     private javax.swing.JToggleButton tgbInterChangeSort;
     private javax.swing.JToggleButton tgbQuickSort;
@@ -565,18 +595,26 @@ public class Main extends javax.swing.JFrame implements Simulator, Algorithm {
         }
         pnSimulation.revalidate();
     }
+    int[] a = {5, 6, 2, 2, 10, 12, 9, 10, 9, 3};
 
     @Override
     public void randomElementArray() {
         ManagerThread.curT = -1;
         ManagerThread.threads = new Thread[999];
         Random rand = new Random();
+
         for (int i = 0; i < ManagerArray.index; i++) {
             int ranNum = rand.nextInt(101) + 0;
             lbArray[i].setText(String.valueOf(ranNum));
             lbArray[i].setBackground(new Color(255, 83, 1));
             ManagerArray.array[i] = ranNum;
         }
+//        for (int i = 0; i < a.length; i++) {
+//            //int ranNum = rand.nextInt(101) + 0;
+//            lbArray[i].setText(String.valueOf(a[i]));
+//            lbArray[i].setBackground(new Color(255, 83, 1));
+//            ManagerArray.array[i] = a[i];
+//        }
     }
 
     @Override
@@ -589,6 +627,7 @@ public class Main extends javax.swing.JFrame implements Simulator, Algorithm {
             tgbShellSort.setEnabled(state);
             tgbQuickSort.setEnabled(state);
             tgbInsertSort.setEnabled(state);
+            tgbHeapSort.setEnabled(state);
             tgbBubbleSort.setEnabled(state);
             tgbSelectionSort.setEnabled(state);
             tgbInterChangeSort.setEnabled(state);
@@ -607,6 +646,7 @@ public class Main extends javax.swing.JFrame implements Simulator, Algorithm {
             tgbShellSort.setEnabled(state);
             tgbQuickSort.setEnabled(state);
             tgbInsertSort.setEnabled(state);
+            tgbHeapSort.setEnabled(state);
             tgbBubbleSort.setEnabled(state);
             tgbSelectionSort.setEnabled(state);
             tgbInterChangeSort.setEnabled(state);
@@ -628,9 +668,9 @@ public class Main extends javax.swing.JFrame implements Simulator, Algorithm {
 
     @Override
     public void startAlgorithm() {
-        ManagerThread.time = 50;
+        ManagerThread.time = 100;
         ManagerIJ.timeIJ = 350;
-        AlgorithmPresenter ap = new AlgorithmPresenter(this, jListRecord, lbArray, lbShowI, lbShowJ, this);
+        AlgorithmPresenter ap = new AlgorithmPresenter(this, jListRecord, lbArray, lbShowI, lbShowJ, this, pnSimulation);
         if (tgbShellSort.isSelected()) {
             ap.chooserIncrease(rdbDecrease.isSelected());
             ap.chooserAlgorithm(0);
@@ -643,26 +683,25 @@ public class Main extends javax.swing.JFrame implements Simulator, Algorithm {
             ap.chooserIncrease(rdbDecrease.isSelected());
             ap.chooserAlgorithm(2);
         }
-        if (tgbBubbleSort.isSelected()) {
+        if (tgbHeapSort.isSelected()) {
             ap.chooserIncrease(rdbDecrease.isSelected());
             ap.chooserAlgorithm(3);
         }
-        if (tgbSelectionSort.isSelected()) {
+        if (tgbBubbleSort.isSelected()) {
             ap.chooserIncrease(rdbDecrease.isSelected());
             ap.chooserAlgorithm(4);
+        }
+        if (tgbSelectionSort.isSelected()) {
+            ap.chooserIncrease(rdbDecrease.isSelected());
+            ap.chooserAlgorithm(5);
         }
         if (tgbInterChangeSort.isSelected()) {
             AlgorithmPresenter app = new AlgorithmPresenter(this, jListRecord, lbArray, lbShowI, lbShowJ, (int) spNum.getValue(), this);
             app.chooserIncrease(rdbDecrease.isSelected());
-            app.chooserAlgorithm(5);
-            //createJlbleKey();
-            //quickSort(0, array.length - 1);
-//            QuickSort qs = new QuickSort(lbArray, lbArrayPos,
-//                    ManagerArray.array, ManagerArray.index, lbShowI,
-//                    lbShowJ, lbShowI, spNum, pnSimulation);
-//            qs.quickSort(0, ManagerArray.array.length - 1);
+            app.chooserAlgorithm(6);
         }
     }
+
     @Override
     public void pauseThread() {
         if (isCheckPause) {
